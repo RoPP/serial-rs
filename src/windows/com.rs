@@ -143,12 +143,26 @@ impl SerialDevice for COMPort {
 
         match unsafe { GetCommState(self.handle, &mut dcb) } {
             0 => Err(super::error::last_os_error()),
-            _ => Ok(COMSettings { inner: dcb })
+            _ => {
+                println!("read settings = {:?}", dcb);
+
+                /*
+                dcb.fBits = fBinary |
+                    fOutxDsrFlow | (fDtrControl & DTR_CONTROL_HANDSHAKE) |
+                    fOutxCtsFlow | (fRtsControl & RTS_CONTROL_HANDSHAKE);
+                */
+
+                dcb.fBits = fBinary;
+
+                Ok(COMSettings { inner: dcb })
+            }
 
         }
     }
 
     fn write_settings(&mut self, settings: &COMSettings) -> ::Result<()> {
+        println!("write settings = {:?}", settings.inner);
+
         match unsafe { SetCommState(self.handle, &settings.inner) } {
             0 => Err(super::error::last_os_error()),
             _ => Ok(())

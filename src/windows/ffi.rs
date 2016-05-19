@@ -99,6 +99,17 @@ pub const fRtsControl:       DWORD = 0x00003000;
 pub const fAbortOnError:     DWORD = 0x00004000;
 pub const fDummy2:           DWORD = 0xFFFF8000;
 
+// fDtrControl values
+pub const DTR_CONTROL_DISABLE:   DWORD = 0x00000000;
+pub const DTR_CONTROL_ENABLE:    DWORD = 0x00000010;
+pub const DTR_CONTROL_HANDSHAKE: DWORD = 0x00000020;
+
+// fRtsControl values
+pub const RTS_CONTROL_DISABLE:   DWORD = 0x00000000;
+pub const RTS_CONTROL_ENABLE:    DWORD = 0x00001000;
+pub const RTS_CONTROL_HANDSHAKE: DWORD = 0x00002000;
+pub const RTS_CONTROL_TOGGLE:    DWORD = 0x00003000;
+
 // Parity values
 pub const NOPARITY:    BYTE = 0;
 pub const ODDPARITY:   BYTE = 1;
